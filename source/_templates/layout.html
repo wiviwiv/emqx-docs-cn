@@ -1,0 +1,62 @@
+{% extends "!layout.html" %}
+
+{%- block extrahead %}
+<script type="text/javascript">
+$(document).ready(function(){
+  var anchor = encodeURI(window.location.hash);
+  if (anchor) {
+    var link = $('.sphinxsidebarwrapper').find('[href="' + anchor + '"]');
+    link.closest('li.toctree-l2').addClass('current');
+  }
+});
+</script>
+{% endblock %}
+
+{% block header %}
+<nav class="navbar navbar-default navbar-fixed-top navbar-padded app-navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <span>EMQTT</span>
+      </a>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class=""><a href="/downloads ">下载</a></li>
+        <li class="active"><a href="/docs/index.html">文档</a></li>
+        <li class=""><a href="/support ">支持与服务</a></li>
+        <li class=""><a href="/changelogs ">日志</a></li>
+        <li class=""><a href="/about ">关于</a></li>
+        <li>
+          <!--
+            <a class="github-button" href="https://github.com/emqtt/emqttd" data-icon="octicon-star" data-style="mega" data-count-href="/emqtt/emqttd/stargazers" data-count-api="/repos/emqtt/emqttd#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star emqtt/emqttd on GitHub">Star</a>
+          -->
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  {{ super() }}
+</div>
+{% endblock %}
+
+{% block sidebar %}
+  {% set toctree = toctree(maxdepth=4, collapse=theme_collapse_navigation, includehidden=True) %}
+  {% if toctree %}
+    {{ toctree }}
+  {% else %}
+    <!-- Local TOC -->
+    <div class="local-toc">{{ toc }}</div>
+  {% endif %}
+{% endblock %}
+
