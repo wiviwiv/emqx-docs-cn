@@ -8,7 +8,18 @@ $(document).ready(function(){
     var link = $('.sphinxsidebarwrapper').find('[href="' + anchor + '"]');
     link.closest('li.toctree-l2').addClass('current');
   }
+
+  $(document).on('click', ".sphinxsidebarwrapper .current ul li a", function() {
+      var target = $(this);
+      var parent_li = target.closest('li');
+      parent_li.siblings('li.current').removeClass('current');
+      parent_li.siblings().find('li.current').removeClass('current');
+      parent_li.find('> ul li.current').removeClass('current');
+      parent_li.toggleClass('current');
+  })
+
 });
+
 </script>
 {% endblock %}
 
