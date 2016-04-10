@@ -1,5 +1,16 @@
+body {
+  font-family: 'Roboto';
+  color: #6C6F73;
+  background-color: #f7f7f7;
+}
+div.body h1, div.body h2, div.body h3, div.body h4, div.body h5, div.body h6 {
+  font-family: 'Roboto';
+  color: #6C6F73;
+}
 div.body {
   padding: 0 0 30px 35px;
+  color: #6C6F73;
+  background-color: #f7f7f7;
 }
 div.body p {
   line-height: 24px;
@@ -7,9 +18,13 @@ div.body p {
 }
 div.body h1, div.body h2, div.body h3, div.body h4, div.body h5, div.body h6 {
   border-bottom: none;
-  background-color: #fff;
-  color: #2D3238;
+  background-color: #f7f7f7;
   margin: 20px -20px 20px -10px;
+}
+
+/* nav */
+.navbar-default {
+  border: none;
 }
 
 /* a tag */
@@ -37,14 +52,15 @@ div.sphinxsidebar {
   height: auto;
 }
 div.sphinxsidebar ul a, div.sphinxsidebar p a {
-  color: #444; 
+  color: #6C6F73; 
   font-size: 15px;
 }
 div.sphinxsidebar h3 a {
-  color: #444; 
+  color: #6C6F73; 
 }
 div.sphinxsidebar ul {
   margin-top: 15px;
+  color: transparent;
 }
 div.sphinxsidebar ul ul li {
   margin-top: 5px;
@@ -68,7 +84,7 @@ a.current.reference.internal {
 /* document */
 div.document {
   margin: 100px 0 0 0;
-  background: none;
+  background-color: #f7f7f7;
 }
 div.note {
   background-color: #d9edf7;
@@ -88,7 +104,7 @@ div.warning {
   border: none;
 }
 pre {
-  background-color: #f7f7f7;
+  background-color: #fff;
   border-radius: 0;
   border: none;
   margin: 0 0 24px;
@@ -105,7 +121,7 @@ table.docutils td, table.docutils th {
 
 /* footer */
 div.footer {
-  color: #444;
+  color: #6C6F73;
   font-size: 15px;
   margin-top: 30px;
 }
