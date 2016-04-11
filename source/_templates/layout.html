@@ -1,7 +1,7 @@
 {% extends "!layout.html" %}
 
 {%- block extrahead %}
-<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic' rel='stylesheet' type='text/css'>
+<!--<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic' rel='stylesheet' type='text/css'>-->
 <script type="text/javascript">
 $(document).ready(function(){
   var anchor = encodeURI(window.location.hash);
@@ -18,6 +18,32 @@ $(document).ready(function(){
       parent_li.find('> ul li.current').removeClass('current');
       parent_li.toggleClass('current');
   })
+
+
+	// get github star
+  var user = 'emqtt';
+  var repo = 'emqttd';
+  
+  // get data
+  var callbackName = 'ghButtonCallback' + Math.floor( Math.random() * 10000 );
+  var button = document.querySelector('.star-button');
+  
+  window[ callbackName ] = function( response ) {
+    var starText = addCommas( response.data.stargazers_count );
+    button.querySelector('.star-text').textContent = starText;
+  }
+  
+  function addCommas( num ) {
+    if (num) {
+      return new String( num ).replace( /(\d)(?=(\d{3})+$)/g, '$1,');
+    } else {
+      return ""
+    }
+  }
+  
+  var script = document.createElement('script');
+  script.src = 'https://api.github.com/repos/' + user + '/' + repo + '?callback=' + callbackName;
+  document.head.appendChild( script );
 
 });
 
@@ -49,6 +75,15 @@ $(document).ready(function(){
           <!--
             <a class="github-button" href="https://github.com/emqtt/emqttd" data-icon="octicon-star" data-style="mega" data-count-href="/emqtt/emqttd/stargazers" data-count-api="/repos/emqtt/emqttd#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star emqtt/emqttd on GitHub">Star</a>
           -->
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="https://github.com/emqtt/emqttd" class="star-button" style="color:#00ab6b;">
+            <span class="icon icon-star"></span>
+            <span style="padding-right: 10px;">Star</span>
+            <span class="star-text"></span>
+          </a>
         </li>
       </ul>
     </div><!--/.nav-collapse -->
