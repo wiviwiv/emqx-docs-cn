@@ -5,6 +5,8 @@
 用户指南
 ========
 
+.. _authentication:
+
 ----
 认证
 ----
@@ -19,7 +21,7 @@ etc/emqttd.config配置启用一个认证模块::
         {auth, [
             %% Authentication with username, password
             %{username, []},
-            
+
             %% Authentication with clientid
             %{clientid, [{password, no}, {file, "etc/clients.config"}]},
 
@@ -99,7 +101,7 @@ etc/clients.config添加客户端ID::
 LDAP认证
 --------
 
-.. code:: erlang
+.. code-block:: erlang
 
     {ldap, [
        {servers, ["localhost"]},
@@ -184,7 +186,7 @@ emqttd_plugin_pgsql/etc/plugin.config配置'authquery'、'password_hash'::
 
         %% hash algorithm: md5, sha, sha256, pbkdf2?
         {password_hash, sha256},
-        
+
         ...
 
       ]}
@@ -221,6 +223,8 @@ emqttd_plugin_redis/etc/plugin.config设置'authcmd'、'password_hash'::
 
     ./bin/emqttd_ctl plugins load emqttd_plugin_redis
 
+.. _acl:
+
 -------------
 访问控制(ACL)
 -------------
@@ -233,7 +237,7 @@ ACL访问控制规则定义::
 
 MQTT客户端发起订阅/发布请求时，emqttd消息服务器的访问控制模块，会逐条匹配ACL规则，直到匹配成功为止::
 
-              ---------              ---------              ---------   
+              ---------              ---------              ---------
     Client -> | Rule1 | --nomatch--> | Rule2 | --nomatch--> | Rule3 | --> Default
               ---------              ---------              ---------
                   |                      |                      |
@@ -613,7 +617,7 @@ Subscriptions - 订阅统计
 +---------------------+---------------------------------------------+
 | 主题(Topic)         | 说明                                        |
 +---------------------+---------------------------------------------+
-| subscriptions/count | 当前订阅总数                                | 
+| subscriptions/count | 当前订阅总数                                |
 +---------------------+---------------------------------------------+
 | subscriptions/max   | 最大订阅数量                                |
 +---------------------+---------------------------------------------+
@@ -724,6 +728,8 @@ Sysmon-系统监控
 +------------------+--------------------+
 | busy_dist_port   | Dist Port忙警告    |
 +------------------+--------------------+
+
+.. _trace:
 
 ----
 追踪

@@ -85,7 +85,7 @@ etc/vm.args文件设置Erlang虚拟机参数::
 etc/vm.args中两个最重要的参数:
 
 +-------+----------------------------------------------------------------------------------------------+
-| +P    | Erlang虚拟机允许的最大进程数，一个MQTT连接会消耗2个Erlang进程，所以参数值 > 最大连接数 * 2   | 
+| +P    | Erlang虚拟机允许的最大进程数，一个MQTT连接会消耗2个Erlang进程，所以参数值 > 最大连接数 * 2   |
 +-------+----------------------------------------------------------------------------------------------+
 | +Q    | Erlang虚拟机允许的最大Port数量，一个MQTT连接消耗1个Port，所以参数值 > 最大连接数             |
 +-------+----------------------------------------------------------------------------------------------+
@@ -97,8 +97,8 @@ etc/vm.args设置Erlang节点名、节点间通信Cookie::
     ## Cookie for distributed erlang
     -setcookie emqttdsecretcookie
 
-.. NOTE:: 
-    
+.. NOTE::
+
     Erlang/OTP平台应用多由分布的Erlang节点(进程)组成，每个Erlang节点(进程)需指配一个节点名，用于节点间通信互访。
     所有互相通信的Erlang节点(进程)间通过一个共用的Cookie进行安全认证。
 
@@ -113,7 +113,7 @@ etc/emqttd.config是消息服务器的核心配置文件。Erlang程序由多个
 
 etc/emqttd.config文件采用的是Erlang数据格式，kernel, sasl, emqttd是Erlang应用(application)名称，'[]'内是应用的环境参数列表。
 
-.. code:: erlang
+.. code-block:: erlang
 
     [{kernel, [
         {start_timer, true},
@@ -222,7 +222,7 @@ emqttd消息服务器认证由一系列认证模块(module)或插件(plugin)提�
         %% Authentication with username, password
         %% Add users: ./bin/emqttd_ctl users add Username Password
         %% {username, [{"test", "public"}]},
-        
+
         %% Authentication with clientid
         % {clientid, [{password, no}, {file, "etc/clients.config"}]},
 
@@ -250,7 +250,7 @@ emqttd消息服务器认证由一系列认证模块(module)或插件(plugin)提�
                       |                         |                         |
                      \|/                       \|/                       \|/
                 allow | deny              allow | deny              allow | deny
- 
+
 .. NOTE:: emqttd消息服务器还提供了MySQL、PostgreSQL、Redis、MongoDB认证插件，
           认证插件加载后认证模块失效。
 
@@ -258,7 +258,7 @@ emqttd消息服务器认证由一系列认证模块(module)或插件(plugin)提�
 用户名密码认证
 ..............
 
-.. code:: erlang
+.. code-block:: erlang
 
     {username, [{test1, "passwd1"}, {test2, "passwd2"}]},
 
@@ -275,7 +275,7 @@ emqttd消息服务器认证由一系列认证模块(module)或插件(plugin)提�
 ClientID认证
 ............
 
-.. code:: erlang
+.. code-block:: erlang
 
     {clientid, [{password, no}, {file, "etc/clients.config"}]},
 
@@ -289,7 +289,7 @@ etc/clients.config文件中添加ClientID::
 LDAP认证
 ........
 
-.. code:: erlang
+.. code-block:: erlang
 
     {ldap, [
        {servers, ["localhost"]},
@@ -504,7 +504,7 @@ broker pubsub路由设置
     {pubsub, [
         %% PubSub Erlang进程池
         {pool_size, 8},
-        
+
         %% 订阅存储类型，true: 存储, false: 不存储
         {subscription, true},
 
@@ -559,7 +559,7 @@ emqtt消息服务器支持简单的扩展模块，用于定制服务器功能。
 plugins插件目录设置
 -------------------
 
-.. code:: erlang
+.. code-block:: erlang
 
     {plugins, [
         %% Plugin App Library Dir
@@ -585,7 +585,7 @@ emqttd消息服务器默认开启的TCP服务端口包括:
 | 8083      | MQTT(WebSocket), HTTP API端口     |
 +-----------+-----------------------------------+
 
-.. code:: erlang
+.. code-block:: erlang
 
     {listeners, [
 
@@ -694,14 +694,14 @@ emqttd消息服务器默认访问控制规则配置在etc/acl.config文件。
 
 访问控制规则采用Erlang元组格式，访问控制模块逐条匹配规则::
 
-              ---------              ---------              ---------   
+              ---------              ---------              ---------
     Client -> | Rule1 | --nomatch--> | Rule2 | --nomatch--> | Rule3 | --> Default
               ---------              ---------              ---------
                   |                      |                      |
                 match                  match                  match
                  \|/                    \|/                    \|/
             allow | deny           allow | deny           allow | deny
-                
+
 etc/acl.config文件默认规则设置::
 
     %% 允许'dashboard'用户订阅 '$SYS/#'

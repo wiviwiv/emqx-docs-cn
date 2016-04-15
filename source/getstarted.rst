@@ -46,8 +46,8 @@ MQTT主题(Topic)支持'+', '#'的通配符，'+'通配一个层级，'#'通配�
 
 MQTT消息发布者(Publisher)只能向特定'名称主题'(不支持通配符)发布消息，订阅者(Subscriber)通过订阅'过滤主题'(支持通配符)来匹配消息。
 
-.. NOTE:: 
-    
+.. NOTE::
+
     初接触MQTT协议的用户，通常会向通配符的'过滤主题'发布广播消息，MQTT协议不支持这种模式，需从订阅侧设计广播主题(Topic)。
     例如Android推送，向所有广州用户，推送某类本地消息，客户端获得GIS位置后，可订阅'news/city/guangzhou'主题。
 
@@ -62,7 +62,7 @@ emqttd消息服务器每个版本，会发布Ubuntu、CentOS、FreeBSD、Mac OS 
 
 程序包下载后，可直接解压启动运行，例如Mac平台:
 
-.. code:: console
+.. code-block:: bash
 
     unzip emqttd-macosx-0.16.0-beta-20160216.zip && cd emqttd
 
@@ -81,7 +81,7 @@ emqttd消息服务默认采用匿名认证，启动后MQTT客户端可连接1883
 源码编译emqttd
 ---------------
 
-.. code:: console
+.. code-block:: bash
 
     git clone https://github.com/emqtt/emqttd.git
 
@@ -117,7 +117,7 @@ emqttd消息服务器功能列表
 * 用户名密码认证支持
 * LDAP认证
 * Redis、MySQL、PostgreSQL认证集成
-* 浏览器Cookie认证 
+* 浏览器Cookie认证
 * 基于客户端ID、IP地址、用户名的访问控制(ACL)
 * 多服务器节点集群(Cluster)
 * 多服务器节点桥接(Bridge)
@@ -283,7 +283,7 @@ MQTT是一个设计得非常出色的传输层协议，在移动消息、物联�
 1. Android消息推送: 推送消息广播测试。
 
 2. 移动即时消息应用: 消息收发确认测试。
-  
+
 3. 智能硬件应用: 消息的往返时延测试。
 
 4. 物联网数据采集: 并发连接与吞吐测试。

@@ -11,8 +11,6 @@ emqttd消息服务器可跨平台运行在Linux、FreeBSD、Mac OS X或Windows�
 
     产品部署建议Linux、FreeBSD服务器，不推荐Windows服务器。
 
-.. _install_download:
-
 ----------------
 emqttd程序包下载
 ----------------
@@ -45,19 +43,19 @@ Linux服务器安装
 
 CentOS平台为例，下载安装包解压: http://emqtt.com/downloads/centos
 
-.. code:: console
+.. code-block:: bash
 
     unzip emqttd-centos64-0.16.0-beta-20160216.zip
 
 控制台调试模式启动，检查emqttd是否可正常启动:
 
-.. code:: console
+.. code-block:: bash
 
     cd emqttd && ./bin/emqttd console
 
 emqttd消息服务器如启动正常，控制台输出:
 
-.. code:: console
+.. code-block:: bash
 
     starting emqttd on node 'emqttd@127.0.0.1'
     emqttd ctl is starting...[done]
@@ -86,7 +84,7 @@ emqttd消息服务器如启动正常，控制台输出:
 
 CTRL+c关闭控制台。守护进程模式启动:
 
-.. code:: console
+.. code-block:: bash
 
     ./bin/emqttd start
 
@@ -94,19 +92,19 @@ CTRL+c关闭控制台。守护进程模式启动:
 
 emqttd消息服务器进程状态查询:
 
-.. code:: console
+.. code-block:: bash
 
     ./bin/emqttd_ctl status
 
 正常运行状态，查询命令返回:
 
-.. code:: console
+.. code-block:: bash
 
     $ ./bin/emqttd_ctl status
     Node 'emqttd@127.0.0.1' is started
     emqttd 0.16.0 is running
 
-emqttd消息服务器提供了状态监控URL:: 
+emqttd消息服务器提供了状态监控URL::
 
     http://localhost:8083/status
 
@@ -134,7 +132,7 @@ Mac下开发调试MQTT应用，可直接下载安装:  http://emqtt.com/download
 
 配置文件'etc/emqttd.config' lager段落打开info日志，控制台可以查看收发MQTT报文详细:
 
-.. code:: erlang
+.. code-block:: erlang
 
     {lager, [
         ...
@@ -157,7 +155,7 @@ Windows平台程序包下载: http://emqtt.com/downloads/windows
 程序包下载解压后，打开Windows命令行窗口，cd到程序目录。
 
 控制台模式启动::
- 
+
     .\bin\emqttd console
 
 如启动成功，会弹出控制台窗口。
@@ -165,7 +163,7 @@ Windows平台程序包下载: http://emqtt.com/downloads/windows
 关闭控制台窗口，停止emqttd进程，准备注册Windows服务。
 
 emqttd注册为Windows服务::
-    
+
     .\bin\emqttd install
 
 emqttd服务启动::
@@ -183,7 +181,7 @@ emqttd服务卸载::
 .. NOTE:: 可通过Windows服务管理控制台进行启停。
 
 .. WARNING:: Windows上管理命令行'./bin/emqttd_ctl'无法使用。日志文件或状态URL: http://localhost:8083/status 查询当前状态。
- 
+
 .. _build_from_source:
 
 ------------
@@ -200,7 +198,7 @@ Ubuntu平台可通过apt-get命令安装，CentOS/RedHat平台可通过yum命令
 
 编译环境准备好之后，clone代码开始编译:
 
-.. code:: console
+.. code-block:: bash
 
     git clone https://github.com/emqtt/emqttd.git
 
@@ -236,7 +234,7 @@ emqttd消息服务器默认占用的TCP端口包括:
 
 emqttd占用的上述端口，可通过etc/emqttd.config配置文件的listeners段落设置:
 
-.. code:: erlang
+.. code-block:: erlang
 
     {listeners, [
         {mqtt, 1883, [
@@ -288,7 +286,7 @@ etc/vm.args中两个重要的启动参数:
 
 etc/emqttd.config文件listeners段落设置最大允许连接数:
 
-.. code:: erlang
+.. code-block:: erlang
 
     {listeners, [
         {mqtt, 1883, [
