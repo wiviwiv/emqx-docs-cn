@@ -1,6 +1,7 @@
 {% extends "!page.html" %}
 
-{% set css_files = css_files + ["../static/dist/toolkit-startup.min.css", "../static/assets/css/application-startup.css", "../static/css/base.css", "_static/style.css"] %}
+{% set css_files = css_files + ["../../static/lib/toolkit-startup.min.css", "../../static/css/base.css", "../../static/css/navbar.css", "../../static/css/docs.css"] %}
+{% set script_files = script_files + ["../../static/lib/toolkit.min.js"] %}
 
 <!--去掉顶部导航栏-->
 {% block relbar1 %}{% endblock %}

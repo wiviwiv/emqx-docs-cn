@@ -2,6 +2,8 @@
 
 {%- block extrahead %}
 <!--<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic' rel='stylesheet' type='text/css'>-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <script type="text/javascript">
 $(document).ready(function(){
   var anchor = encodeURI(window.location.hash);
@@ -45,6 +47,51 @@ $(document).ready(function(){
   script.src = 'https://api.github.com/repos/' + user + '/' + repo + '?callback=' + callbackName;
   document.head.appendChild( script );
 
+
+  // company secondary nav
+  var page_width = document.body.clientWidth;
+  if (page_width > 768) {
+    $(".desktop-popover").popover({
+      placement: "bottom",
+      html: true,
+      content: function() {
+        return $("#popover_content_wrapper").html();
+      }
+    });
+  } else {
+    $(".company-popover").css("display", "none");
+    $(".company-dropdown").css("display", "block");
+  }
+
+
+  // doc version menu
+  var second_nav = $(".second-navbar");
+  var navbar_header = $(".second-navbar .navbar-header");
+  var nav_offset_top = second_nav.offset().top;
+  $(window).scroll(function() {
+    var top = $(document).scrollTop();
+    if (nav_offset_top <= top) {
+      second_nav.css({"position": "fixed", "margin-top": "0", "z-index": "1031"});
+      $(".document").css("margin-top", "141px");
+      navbar_header.css("display", "inline-block")
+    } else {
+      second_nav.css({"position": "relative", "margin-top": "71px", "z-index": "0"});
+      $(".document").css("margin-top", "0");
+      navbar_header.css("display", "none")
+    }
+  });
+
+
+  // doc menu active
+  var docs = $(".second-navbar .navbar-right li").find("a");
+  var pathname = window.location.pathname;
+  var version = pathname.split('/')[2]
+  for (var i=0; i<docs.length; i++) {
+    if (docs[i].href.indexOf(version) != -1) {
+      $(docs[i].parentElement).addClass('active');
+    }
+  }
+
 });
 
 </script>
@@ -61,34 +108,62 @@ $(document).ready(function(){
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/">
-        <span>EMQTT</span>
+        <em>EMQ</em>
       </a>
     </div>
+
     <div class="navbar-collapse collapse" id="navbar-collapse">
       <ul class="nav navbar-nav">
         <li class=""><a href="/downloads ">下载</a></li>
-        <li class="active"><a href="/docs/index.html">文档</a></li>
-        <li class=""><a href="/support ">支持</a></li>
-        <li class=""><a href="/partners">伙伴</a></li>
-        <li class=""><a href="/changelogs ">日志</a></li>
-        <li class=""><a href="/news ">新闻</a></li>
-        <li class=""><a href="/about ">关于</a></li>
-        <li>
-          <!--
-            <a class="github-button" href="https://github.com/emqtt/emqttd" data-icon="octicon-star" data-style="mega" data-count-href="/emqtt/emqttd/stargazers" data-count-api="/repos/emqtt/emqttd#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star emqtt/emqttd on GitHub">Star</a>
-          -->
+        <li class="active"><a href="http://emqtt.com/docs/v2/index.html ">文档</a></li>
+        <li class=""><a href="/products ">产品</a></li>
+        <li class=""><a href="/support ">服务</a></li>
+        <li class=""><a href="/partners ">伙伴</a></li>
+        <li class="company-popover ">
+          <a tabindex="0" role="button" class="desktop-popover" data-toggle="popover" data-trigger="focus"> 公司 <span class="caret"></span></a>
+          <div id="popover_content_wrapper" style="display: none">
+            <ul class="popover-menu">
+              <li><a href="/about ">关于</a></li>
+              <li><a href="/changelogs ">日志</a></li>
+              <li><a href="/news ">新闻</a></li>
+              <li><a href="/jobs ">招聘</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="company-dropdown " style="display: none;">
+          <a role="button" data-toggle="dropdown" > 公司 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/about ">关于</a></li>
+            <li><a href="/changelogs ">日志</a></li>
+            <li><a href="/news ">新闻</a></li>
+            <li><a href="/jobs ">招聘</a></li>
+          </ul>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="https://github.com/emqtt/emqttd" class="star-button" style="color:#00ab6b;">
+          <a href="https://github.com/emqtt/emqttd" class="star-button">
             <span class="icon icon-star"></span>
-            <span style="padding-right: 10px;">Star</span>
+            <span style="padding-right: 8px;">Star</span>
             <span class="star-text"></span>
           </a>
         </li>
       </ul>
     </div><!--/.nav-collapse -->
+  </div>
+</nav>
+<nav class="navbar second-navbar" style="position: relative; margin-top: 71px;margin-bottom:0;">
+  <div class="container">
+    <div class="navbar-header">
+      <div class="navbar-brand">
+        <em>EMQ</em>
+        <span class="m-l">文档</span>
+      </div>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li id="v-1"><a href="/docs/v1/index.html">V1.0</a></li>
+      <li id="v-2"><a href="/docs/v2/index.html">V2.0</a></li>
+    </ul>
   </div>
 </nav>
 {% endblock %}
@@ -100,12 +175,12 @@ $(document).ready(function(){
 {% endblock %}
 
 {% block sidebar %}
-  {% set toctree = toctree(maxdepth=4, collapse=theme_collapse_navigation, includehidden=True) %}
-  {% if toctree %}
-    {{ toctree }}
-  {% else %}
-    <!-- Local TOC -->
-    <div class="local-toc">{{ toc }}</div>
-  {% endif %}
+{% set toctree = toctree(maxdepth=4, collapse=theme_collapse_navigation, includehidden=True) %}
+{% if toctree %}
+{{ toctree }}
+{% else %}
+<!-- Local TOC -->
+<div class="local-toc">{{ toc }}</div>
+{% endif %}
 {% endblock %}
 
