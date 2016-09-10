@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git checkout master
+git checkout stable
 git pull
 git checkout emqtt.com && git merge master
 source .venv/bin/activate && make html
