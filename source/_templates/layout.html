@@ -30,32 +30,6 @@ $(document).ready(function(){
   })
 
 
-	// get github star
-  var user = 'emqtt';
-  var repo = 'emqttd';
-  
-  // get data
-  var callbackName = 'ghButtonCallback' + Math.floor( Math.random() * 10000 );
-  var button = document.querySelector('.star-button');
-  
-  window[ callbackName ] = function( response ) {
-    var starText = addCommas( response.data.stargazers_count );
-    button.querySelector('.star-text').textContent = starText;
-  }
-  
-  function addCommas( num ) {
-    if (num) {
-      return new String( num ).replace( /(\d)(?=(\d{3})+$)/g, '$1,');
-    } else {
-      return ""
-    }
-  }
-  
-  var script = document.createElement('script');
-  script.src = 'https://api.github.com/repos/' + user + '/' + repo + '?callback=' + callbackName;
-  document.getElementsByTagName('head')[0].appendChild( script );
-
-
   // doc version menu
   var second_nav = $(".second-navbar");
   var navbar_header = $(".second-navbar .navbar-header");
