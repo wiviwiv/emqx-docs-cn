@@ -3,6 +3,14 @@
 {%- block extrahead %}
 <!--<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic' rel='stylesheet' type='text/css'>-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="/static/lib/html5shiv.min.js"></script>
+  <script src="/static/lib/respond.min.js"></script>
+  <script src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+<![endif]-->
+
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -45,23 +53,7 @@ $(document).ready(function(){
   
   var script = document.createElement('script');
   script.src = 'https://api.github.com/repos/' + user + '/' + repo + '?callback=' + callbackName;
-  document.head.appendChild( script );
-
-
-  // company secondary nav
-  var page_width = document.body.clientWidth;
-  if (page_width > 768) {
-    $(".desktop-popover").popover({
-      placement: "bottom",
-      html: true,
-      content: function() {
-        return $("#popover_content_wrapper").html();
-      }
-    });
-  } else {
-    $(".company-popover").css("display", "none");
-    $(".company-dropdown").css("display", "block");
-  }
+  document.getElementsByTagName('head')[0].appendChild( script );
 
 
   // doc version menu
@@ -119,21 +111,9 @@ $(document).ready(function(){
         <li class=""><a href="/products ">产品</a></li>
         <li class=""><a href="/support ">服务</a></li>
         <li class=""><a href="/partners ">伙伴</a></li>
-        <li class="company-popover ">
-          <a tabindex="0" role="button" class="desktop-popover" data-toggle="popover" data-trigger="focus"> 公司 <span class="caret"></span></a>
-          <div id="popover_content_wrapper" style="display: none">
-            <ul class="popover-menu">
-              <li><a href="/about ">关于</a></li>
-              <li><a href="/changelogs ">日志</a></li>
-              <li><a href="/news ">新闻</a></li>
-              <li><a href="/jobs ">招聘</a></li>
-              <li><a href="/about#investor">投资</a></li>
-            </ul>
-          </div>
-        </li>
-        <li class="company-dropdown " style="display: none;">
+        <li class="dropdown">
           <a role="button" data-toggle="dropdown" > 公司 <span class="caret"></span></a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" role="menu">
             <li><a href="/about ">关于</a></li>
             <li><a href="/changelogs ">日志</a></li>
             <li><a href="/news ">新闻</a></li>
