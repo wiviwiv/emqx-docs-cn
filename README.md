@@ -1,171 +1,105 @@
+---
+date: '2020-02-07T17:15:26.000Z'
+author: wivwiv
+keywords: null
+description: null
+category: null
+ref: null
+---
 
-《*EMQ* 2.0中文文档》
-=====================
+# EMQ X 消息服务器简介
 
-* **[开始使用(GetStarted)](http://docs.emqtt.cn/zh_CN/latest/getstarted.html)**
-  * [*EMQ* 2.0 消息服务器简介](http://docs.emqtt.cn/zh_CN/latest/getstarted.html#emq-2-0)
-  * [MQTT发布订阅模式简述](http://docs.emqtt.cn/zh_CN/latest/getstarted.html#mqtt)
-  * [五分钟下载启动EMQ](http://docs.emqtt.cn/zh_CN/latest/getstarted.html#emq)
-  * [源码编译EMQ 2.0](http://docs.emqtt.cn/zh_CN/latest/getstarted.html#compile)
-  * [Web管理控制台(Dashboard)](http://docs.emqtt.cn/zh_CN/latest/getstarted.html#web-dashboard)
-  * [*EMQ* 2.0功能列表](http://docs.emqtt.cn/zh_CN/latest/getstarted.html#features)
-  * [*EMQ* 2.0扩展插件列表](http://docs.emqtt.cn/zh_CN/latest/getstarted.html#plugins)
-  * [100万线连接测试说明](http://docs.emqtt.cn/zh_CN/latest/getstarted.html#c1000k)
-  * [开源MQTT客户端项目](http://docs.emqtt.cn/zh_CN/latest/getstarted.html#mqtt-clients)
+_EMQ X_ \(Erlang/Enterprise/Elastic MQTT Broker\) 是基于 Erlang/OTP 平台开发的开源物联网 MQTT 消息服务器。
 
-* **[安装部署(Installation)](http://docs.emqtt.cn/zh_CN/latest/install.html)**
-  * [*EMQ* 2.0程序包下载](http://docs.emqtt.cn/zh_CN/latest/install.html#emq-2-0)
-  * [Linux服务器安装](http://docs.emqtt.cn/zh_CN/latest/install.html#linux)
-  * [FreeBSD服务器安装](http://docs.emqtt.cn/zh_CN/latest/install.html#freebsd)
-  * [Mac OS X系统安装](http://docs.emqtt.cn/zh_CN/latest/install.html#mac-os-x)
-  * [Windows服务器安装](http://docs.emqtt.cn/zh_CN/latest/install.html#windows)
-  * [Docker镜像安装](http://docs.emqtt.cn/zh_CN/latest/install.html#docker)
-  * [源码编译安装](http://docs.emqtt.cn/zh_CN/latest/install.html#build-from-source)
-  * [TCP服务端口占用](http://docs.emqtt.cn/zh_CN/latest/install.html#tcp)
-  * [快速设置](http://docs.emqtt.cn/zh_CN/latest/install.html#quick-setup)
-  * [/etc/init.d/emqttd](http://docs.emqtt.cn/zh_CN/latest/install.html#etc-init-d-emqttd)
+Erlang/OTP是出色的软实时 \(Soft-Realtime\)、低延时 \(Low-Latency\)、分布式 \(Distributed\)的语言平台。
 
-* **[青云映像(Image)](http://docs.emqtt.cn/zh_CN/latest/image.html)**
+MQTT 是轻量的 \(Lightweight\)、发布订阅模式 \(PubSub\) 的物联网消息协议。
 
-* **[配置说明(Configuration)](http://docs.emqtt.cn/zh_CN/latest/config.html)**
-  * [*EMQ* 2.0 配置文件](http://docs.emqtt.cn/zh_CN/latest/config.html#emq-2-0)
-  * [*EMQ* 配置变更历史](http://docs.emqtt.cn/zh_CN/latest/config.html#emq)
-  * [*EMQ* 2.0 环境变量](http://docs.emqtt.cn/zh_CN/latest/config.html#id2)
-  * [*EMQ*节点与Cookie](http://docs.emqtt.cn/zh_CN/latest/config.html#emqcookie)
-  * [Erlang虚拟机参数](http://docs.emqtt.cn/zh_CN/latest/config.html#erlang)
-  * [日志参数配置](http://docs.emqtt.cn/zh_CN/latest/config.html#id3)
-  * [MQTT 协议参数配置](http://docs.emqtt.cn/zh_CN/latest/config.html#mqtt)
-  * [匿名认证与ACL文件](http://docs.emqtt.cn/zh_CN/latest/config.html#acl)
-  * [MQTT会话参数设置](http://docs.emqtt.cn/zh_CN/latest/config.html#id8)
-  * [MQTT消息队列参数设置](http://docs.emqtt.cn/zh_CN/latest/config.html#id9)
-  * [Broker参数设置](http://docs.emqtt.cn/zh_CN/latest/config.html#broker)
-  * [发布订阅(PubSub)参数设置](http://docs.emqtt.cn/zh_CN/latest/config.html#pubsub)
-  * [桥接(Bridge)参数设置](http://docs.emqtt.cn/zh_CN/latest/config.html#bridge)
-  * [Plugins插件配置目录设置](http://docs.emqtt.cn/zh_CN/latest/config.html#plugins)
-  * [MQTT Listeners参数说明](http://docs.emqtt.cn/zh_CN/latest/config.html#mqtt-listeners)
-  * [MQTT(TCP)监听器 - 1883](http://docs.emqtt.cn/zh_CN/latest/config.html#mqtt-tcp-1883)
-  * [MQTT(SSL)监听器 - 8883](http://docs.emqtt.cn/zh_CN/latest/config.html#mqtt-ssl-8883)
-  * [MQTT(WebSocket)监听器 - 8083](http://docs.emqtt.cn/zh_CN/latest/config.html#mqtt-websocket-8083)
-  * [MQTT(WebSocket/SSL)监听器 - 8084](http://docs.emqtt.cn/zh_CN/latest/config.html#mqtt-websocket-ssl-8084)
-  * [Erlang虚拟机监控设置](http://docs.emqtt.cn/zh_CN/latest/config.html#id10)
-  * [扩展插件配置文件 ](http://docs.emqtt.cn/zh_CN/latest/config.html#id11)
+EMQ X 设计目标是实现高可靠，并支持承载海量物联网终端的MQTT连接，支持在海量物联网设备间低延时消息路由:
 
-* **[分布集群(Cluster)](http://docs.emqtt.cn/zh_CN/latest/cluster.html)**
-  * [Erlang/OTP分布式编程](http://docs.emqtt.cn/zh_CN/latest/cluster.html#erlang-otp)
-  * [*EMQ* 2.0分布集群设计](http://docs.emqtt.cn/zh_CN/latest/cluster.html#emq-2-0)
-  * [*EMQ* 2.0集群配置管理](http://docs.emqtt.cn/zh_CN/latest/cluster.html#id3)
-  * [跨节点会话(Session)](http://docs.emqtt.cn/zh_CN/latest/cluster.html#session)
-  * [防火墙设置](http://docs.emqtt.cn/zh_CN/latest/cluster.html#cluster-firewall)
-  * [注意事项: NetSplit](http://docs.emqtt.cn/zh_CN/latest/cluster.html#netsplit)
-  * [一致性Hash与DHT](http://docs.emqtt.cn/zh_CN/latest/cluster.html#hashdht)
+1. 稳定承载大规模的 MQTT 客户端连接，单服务器节点支持50万到100万连接。
+2. 分布式节点集群，快速低延时的消息路由，单集群支持1000万规模的路由。
+3. 消息服务器内扩展，支持定制多种认证方式、高效存储消息到后端数据库。
+4. 完整物联网协议支持，MQTT、MQTT-SN、CoAP、LwM2M、WebSocket 或私有协议支持。
 
-* **[分布桥接(Bridge)](http://docs.emqtt.cn/zh_CN/latest/bridge.html)**
-  * [*EMQ*节点间桥接](http://docs.emqtt.cn/zh_CN/latest/bridge.html#emq)
-  * [mosquitto桥接](http://docs.emqtt.cn/zh_CN/latest/bridge.html#mosquitto)
-  * [rsmb桥接](http://docs.emqtt.cn/zh_CN/latest/bridge.html#rsmb)
+**建议您在使用前仔细阅读一遍下面列出的文档，未列出的其他文档可以按需选择查看：**
 
-* **[用户指南(User Guide)](http://docs.emqtt.cn/zh_CN/latest/guide.html)**
-  * [MQTT认证设置](http://docs.emqtt.cn/zh_CN/latest/guide.html#mqtt)
-  * [开启匿名认证](http://docs.emqtt.cn/zh_CN/latest/guide.html#id1)
-  * [用户名密码认证](http://docs.emqtt.cn/zh_CN/latest/guide.html#id2)
-  * [ClientId认证](http://docs.emqtt.cn/zh_CN/latest/guide.html#clientid)
-  * [LDAP插件认证](http://docs.emqtt.cn/zh_CN/latest/guide.html#ldap)
-  * [HTTP插件认证](http://docs.emqtt.cn/zh_CN/latest/guide.html#http)
-  * [MySQL插件认证](http://docs.emqtt.cn/zh_CN/latest/guide.html#mysql)
-  * [Postgre插件认证](http://docs.emqtt.cn/zh_CN/latest/guide.html#postgre)
-  * [Redis插件认证](http://docs.emqtt.cn/zh_CN/latest/guide.html#redis)
-  * [MongoDB插件认证](http://docs.emqtt.cn/zh_CN/latest/guide.html#mongodb)
-  * [访问控制(ACL)](http://docs.emqtt.cn/zh_CN/latest/guide.html#acl)
-  * [默认访问控制设置](http://docs.emqtt.cn/zh_CN/latest/guide.html#id4)
-  * [HTTP插件访问控制](http://docs.emqtt.cn/zh_CN/latest/guide.html#id5)
-  * [MySQL插件访问控制](http://docs.emqtt.cn/zh_CN/latest/guide.html#id6)
-  * [Postgre插件访问控制](http://docs.emqtt.cn/zh_CN/latest/guide.html#id7)
-  * [Redis插件访问控制](http://docs.emqtt.cn/zh_CN/latest/guide.html#id8)
-  * [MongoDB插件访问控制](http://docs.emqtt.cn/zh_CN/latest/guide.html#id9)
-  * [MQTT发布订阅](http://docs.emqtt.cn/zh_CN/latest/guide.html#id10)
-  * [HTTP发布接口](http://docs.emqtt.cn/zh_CN/latest/guide.html#http-publish)
-  * [MQTT WebSocket连接](http://docs.emqtt.cn/zh_CN/latest/guide.html#mqtt-websocket)
-  * [$SYS-系统主题](http://docs.emqtt.cn/zh_CN/latest/guide.html#sys)
-  * [追踪](http://docs.emqtt.cn/zh_CN/latest/guide.html#trace)
+## 开始使用
 
-* **[高级特性 (Advanced)](http://docs.emqtt.cn/zh_CN/latest/advanced.html)**
-  * [本地订阅(Local Subscription)](http://docs.emqtt.cn/zh_CN/latest/advanced.html#local-subscription)
-  * [共享订阅(Shared Subscription)](http://docs.emqtt.cn/zh_CN/latest/advanced.html#shared-subscription)
+* [安装](getting-started/install.md)：不同操作系统与安装包类型的下载、安装步骤。
+* [启动 EMQ X](getting-started/start.md)：启动 EMQ X 并查看启动状态。
+* [Dashboard](getting-started/dashboard.md)：通过 Dashboard 管理 EMQ X 及在线设备。
 
-* **[架构设计(Design)](http://docs.emqtt.cn/zh_CN/latest/design.html)**
-  * [前言](http://docs.emqtt.cn/zh_CN/latest/design.html#intro)
-  * [系统架构](http://docs.emqtt.cn/zh_CN/latest/design.html#architecture)
-  * [连接层设计](http://docs.emqtt.cn/zh_CN/latest/design.html#connection-layer)
-  * [会话层设计](http://docs.emqtt.cn/zh_CN/latest/design.html#session-layer)
-  * [路由层设计](http://docs.emqtt.cn/zh_CN/latest/design.html#route-layer)
-  * [分布层设计](http://docs.emqtt.cn/zh_CN/latest/design.html#distributed-layer)
-  * [认证与访问控制设计](http://docs.emqtt.cn/zh_CN/latest/design.html#auth-acl)
-  * [钩子(Hook)设计](http://docs.emqtt.cn/zh_CN/latest/design.html#hook)
-  * [插件(Plugin)设计](http://docs.emqtt.cn/zh_CN/latest/design.html#plugin)
-  * [Mnesia/ETS 表设计](http://docs.emqtt.cn/zh_CN/latest/design.html#mnesia-ets)
-  * [Erlang设计相关](http://docs.emqtt.cn/zh_CN/latest/design.html#erlang)
+## 认证鉴权
 
-* **[管理命令(CLI)](http://docs.emqtt.cn/zh_CN/latest/commands.html)**
-  * [status命令](http://docs.emqtt.cn/zh_CN/latest/commands.html#status)
-  * [broker命令](http://docs.emqtt.cn/zh_CN/latest/commands.html#broker)
-  * [cluster命令](http://docs.emqtt.cn/zh_CN/latest/commands.html#cluster)
-  * [clients命令](http://docs.emqtt.cn/zh_CN/latest/commands.html#clients)
-  * [sessions命令](http://docs.emqtt.cn/zh_CN/latest/commands.html#sessions)
-  * [routes命令](http://docs.emqtt.cn/zh_CN/latest/commands.html#routes)
-  * [topics命令](http://docs.emqtt.cn/zh_CN/latest/commands.html#topics)
-  * [subscriptions命令](http://docs.emqtt.cn/zh_CN/latest/commands.html#subscriptions)
-  * [plugins命令](http://docs.emqtt.cn/zh_CN/latest/commands.html#plugins)
-  * [bridges命令](http://docs.emqtt.cn/zh_CN/latest/commands.html#bridges)
-  * [vm命令](http://docs.emqtt.cn/zh_CN/latest/commands.html#vm)
-  * [trace命令](http://docs.emqtt.cn/zh_CN/latest/commands.html#trace)
-  * [listeners](http://docs.emqtt.cn/zh_CN/latest/commands.html#listeners)
-  * [mnesia命令](http://docs.emqtt.cn/zh_CN/latest/commands.html#mnesia)
-  * [admins命令](http://docs.emqtt.cn/zh_CN/latest/commands.html#admins)
+* [认证简介](advanced/auth.md)：选择内置插件、外部数据库、JWT 或者 HTTP 服务作为认证数据源，验证客户端连接合法性。
+* [发布订阅 ACL](advanced/acl.md)：选择内置插件、外部数据库、或者 HTTP 服务作为 ACL 数据源，验证客户端发布订阅权限。
+* [内置 ACL](modules/internal_acl.md)：内置 ACL 可能会影响到重要功能，使用前请详细了解。
 
-* **[扩展插件(Plugins)](http://docs.emqtt.cn/zh_CN/latest/plugins.html)**
-  * [emq_auth_clientid - ClientID认证插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-auth-clientid-clientid)
-  * [emq_auth_username - 用户名密码认证插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-auth-username)
-  * [emq_plugin_template: 插件开发模版](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-plugin-template)
-  * [emq_dashboard: Dashboard插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-dashboard-dashboard)
-  * [emq_auth_ldap: LDAP认证插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-auth-ldap-ldap)
-  * [emq_auth_http: HTTP认证/访问控制插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-auth-http-http)
-  * [emq_auth_mysql: MySQL认证/访问控制插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-auth-mysql-mysql)
-  * [emq_auth_pgsql: Postgre认证/访问控制插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-auth-pgsql-postgre)
-  * [emq_auth_redis: Redis认证/访问控制插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-auth-redis-redis)
-  * [emq_auth_mongo: MongoDB认证/访问控制插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-auth-mongo-mongodb)
-  * [emq_mod_presence Presence模块插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-mod-presence-presence)
-  * [emq_mod_retainer Retainer模块插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-mod-retainer-retainer)
-  * [emq_mod_subscription 自动订阅模块插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-mod-subscription)
-  * [emq_mod_rewrite主题重写插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-mod-rewrite)
-  * [emq_coap: CoAP协议插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-coap-coap)
-  * [emq_sn: MQTT-SN协议插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-sn-mqtt-sn)
-  * [emq_stomp: Stomp协议插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-stomp-stomp)
-  * [emq_sockjs: Stomp/Sockjs插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-sockjs-stomp-sockjs)
-  * [emq_recon: Recon性能调试插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-recon-recon)
-  * [emq_reloader: 代码热加载插件](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-reloader)
-  * [EMQ 2.0插件开发](http://docs.emqtt.cn/zh_CN/latest/plugins.html#emq-2-0)
+## FAQ 常见问题解答
 
-* **[测试调优(Tune Guide)](http://docs.emqtt.cn/zh_CN/latest/tune.html)**
-  * [Linux操作系统参数](http://docs.emqtt.cn/zh_CN/latest/tune.html#linux)
-  * [TCP协议栈网络参数](http://docs.emqtt.cn/zh_CN/latest/tune.html#tcp)
-  * [Erlang虚拟机参数](http://docs.emqtt.cn/zh_CN/latest/tune.html#erlang)
-  * [EMQ消息服务器参数](http://docs.emqtt.cn/zh_CN/latest/tune.html#emq)
-  * [测试客户端设置](http://docs.emqtt.cn/zh_CN/latest/tune.html#id1)
+[FAQ 常见问题解答](faq/faq.md)定期收集整理 EMQ X 用户常见问题和经常遇到的错误，如 Topic 数量限制、开源版/企业版区别，企业服务收费等；开源版如何存储数据等。
 
-支持与联系
-==========
+## 社区交流
 
-公司:    http://emqtt.com 
+* [资源](awesome/awesome.md)：社区交流，包含社区热门教程、项目展示等资源。
 
-微信:    emqttd                         
+## HTTP API
 
-微博:    http://weibo.com/emqtt         
+HTTP API 是物联网平台开发与 EMQ X 运维中频繁使用的功能，HTTP API 可以实现与外部系统的集成，例如查询并管理客户端信息、代理订阅、发布消息和创建规则等。
 
-Twitter: @emqtt                         
+* [HTTP API](advanced/http-api.md)：包含 HTTP API 接入点、接入认证方式。
+* [基本信息](advanced/http-api.md#endpoint-brokers)：获取 EMQ X 版本、运行状态等基本信息。
+* [节点](advanced/http-api.md#endpoint-nodes)：获取 EMQ X 节点信息。
+* [客户端](advanced/http-api.md#endpoint-clients)：查看在线客户端信息，支持踢出客户端。
+* [订阅信息](advanced/http-api.md#endpoint-subscriptions)：查看订阅主题列表与订阅关系。
+* [路由](advanced/http-api.md#endpoint-routes)：查看已订阅的主题。
+* [消息发布](advanced/http-api.md#endpoint-publish)：通过 HTTP 调用 EMQ X 发布 MQTT 消息，应用程序与客户端通信可靠的方式。
+* [主题订阅](advanced/http-api.md#endpoint-subscribe)：动态管理客户端订阅列表，无需客户端主动发起订阅/取消订阅。
+* [插件](advanced/http-api.md#endpoint-plugins)：插件的状态管理，启动、停止操作。
 
-作者:    李枫 <feng@emqtt.io> 
+其他更多 API 请通过左侧目录查看。
 
-http://emqtt.com/docs/v2 | http://docs.emqtt.cn/
+## 规则引擎
 
-![weixin](https://github.com/emqtt/docs_zh/blob/master/source/_static/images/weixin.jpg)
+规则引擎实现了消息数据与通过规则引擎能够筛选、处理、转发/存储消息到外部数据源，包括关系数据库、消息队列、Web 服务等等。
+
+* [规则引擎](rule/rule-engine.md)：规则引擎的概念、基础使用方式。
+* [创建规则](rule/rule-create.md)：如何创建一条规则。
+* [使用示例](rule/rule-example.md#发送数据到-web-服务)：规则引擎使用各类数据源的教程。
+
+## 数据存储
+
+EMQ X 企业版特有功能，数据存储将客户端上下线状态，订阅关系，离线消息、消息内容，消息抵达后发送的消息回执等操作记录到各种数据库中。数据存储包含运行时数据与消息数据，能够在服务崩溃、客户端异常离线后仍然保留数据。
+
+* [数据存储](backend/backend.md)：基本概念与使用场景。
+* [数据存储配置](backend/backend.md#redis-数据存储)：使用不同的数据源进行数据存储。
+
+## 消息桥接
+
+EMQ X 企业版桥接转发 MQTT 消息到 Kafka、RabbitMQ、Pulsar、RocketMQ、MQTT Broker 或其他 EMQ X 节点。
+
+* [MQTT 桥接](bridge/bridge.md#mqtt-桥接)：实现跨地域、跨集群部署。
+* [RPC 桥接](bridge/bridge.md#rpc-桥接)
+* [Kafka 桥接](bridge/bridge.md#kafka-桥接)
+* [RabbitMQ 桥接](bridge/bridge.md#rabbitmq-桥接)
+* [Pulsar 桥接](bridge/bridge.md#pulsar-桥接)
+* [RocketMQ 桥接](bridge/bridge.md#rocketmq-桥接)
+
+## 运维部署
+
+包含官方使用指南、最佳实践等信息。
+
+* [设备管理](tutorial/device-management.md)
+* [系统调优](tutorial/tune.md)
+* [生产部署](tutorial/deploy.md)
+* [Prometheus 监控告警](tutorial/prometheus.md)
+* [性能测试](tutorial/benchmark.md)
+
+## 协议介绍
+
+* [MQTT 协议](development/protocol.md)
+* [MQTT-SN 协议](development/protocol.md#mqtt-sn-协议)
+* [LwM2M 协议](development/protocol.md#lwm2m-协议)
+* [私有 TCP 协议](development/protocol.md#私有-tcp-协议)
 
